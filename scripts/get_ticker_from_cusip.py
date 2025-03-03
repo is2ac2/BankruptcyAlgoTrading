@@ -3,14 +3,14 @@ import requests
 import time
 
 # Load CSV File
-file_path = "Lopucki Bankruptcy Database Filtered for CUSIP9.csv"  # Replace with actual file path
+file_path = "./data/lopucki_data_cusip.csv"  # Replace with actual file path
 df = pd.read_csv(file_path)
 
 # Combine cusip6 and cusip9 to create full CUSIP
 df["CUSIP"] = df["Cusip6"].astype(str) + df["Cusip9"].astype(str)
 
 # OpenFIGI API details
-OPENFIGI_API_URL = "https://api.openfigi.com/v2/mapping"
+OPENFIGI_API_URL = "https://api.openfigi.com/v3/mapping"
 HEADERS = {"Content-Type": "application/json"}
 
 def get_tickers_from_cusips(cusips, retries=3):
