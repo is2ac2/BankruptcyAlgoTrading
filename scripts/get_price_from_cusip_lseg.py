@@ -27,6 +27,11 @@ rd.GrantPassword(username = rdp_login, password = rdp_password)
 # cusip = '006855100'
 companiesList = pd.load_csv("companies_with_tickers.csv") # load the list of companies
 cusips = companiesList['Cusip9']
+
+# Define date range
+start_date = "1950-01-01"
+end_date = "2024-10-01"
+
 for cusip in cusips: # loop through companies to get data
 # cusip = '004308102'
 
@@ -39,9 +44,6 @@ for cusip in cusips: # loop through companies to get data
     isin = isin_lookup.iloc[0, 1]  # Get ISIN value
     print(f"ISIN for CUSIP {cusip}: {isin}")
 
-    # Define date range
-    start_date = "1950-01-01"
-    end_date = "2024-10-01"
 
     # Fetch historical stock price data
 
@@ -56,4 +58,4 @@ for cusip in cusips: # loop through companies to get data
     pd.to_csv(f"{cusip}_historical_data.csv", historical_data) # save data to csv using cusip as identifier, could change to isin or ticker
     print(historical_data)
 
-    rd.close_session()
+rd.close_session()
